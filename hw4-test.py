@@ -15,6 +15,7 @@ class tester_most_common_char(unittest.TestCase):
 	def test__given(self):
 		self.assertEqual(most_common_char('AVX is a feature in modern CPUs that allows one instruction to affect multiple units. vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvectors'), 'v')
 		self.assertIn(most_common_char('aabbaabb'), ['a','b'])
+		self.assertIn(most_common_char('aabbaabbcccc'), ['a', 'b', 'c'])
 
 
 class tester_alphabet_finder(unittest.TestCase):
@@ -49,6 +50,8 @@ class tester_alive_people(unittest.TestCase):
 	# under certain circumstances O(k) solution MIGHT exist?@timeout_decorator.timeout(TIMEOUT_SHORT)
 	def test__given(self):
 		self.assertEqual(alive_people([[1920, 80], [1940, 22], [1961, 10]]), 1961)
+		self.assertEqual(alive_people([[1920, 80], [1920, 22], [1961, 10]]), 1920)
+		self.assertEqual(alive_people([[1920, 80], [1920, 22], [1961, 10], [1961, 10]]), 1961)
 
 
 class tester_three_sum(unittest.TestCase):

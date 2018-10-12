@@ -4,7 +4,7 @@ Prepared by Andrew, Emilio, and Prithvi
 
 You might find certain default Python packages immensely helpful.
 """
-
+import string
 # Good luck!
 
 """
@@ -13,7 +13,24 @@ most_common_char
 Given an input string s, return the most common character in s.
 """
 def most_common_char(s):
-	pass
+    dictionary = {}
+
+    for letters in s:
+        if letters in dictionary:
+            dictionary[letters] += 1
+        else:
+            dictionary[letters] = 1
+
+    maximum = 0
+    most = ""
+
+    for letter in dictionary:
+        if dictionary[letter] > maximum:
+            maximum = dictionary[letter]
+            most = letter
+
+    return most
+
 
 
 """
@@ -25,10 +42,10 @@ If there is no such prefix, return None.
 Your function should recognize letters in both cases, i.e. "qwertyuiopASDFGHJKLzxcvbnm" is a valid alphabet.
 
 Example 1:
-	Argument:
-		"qwertyuiopASDFGHJKLzxcvbnm insensitive paella"
-	Return:
-		"qwertyuiopASDFGHJKLzxcvbnm"
+    Argument:
+        "qwertyuiopASDFGHJKLzxcvbnm insensitive paella"
+    Return:
+        "qwertyuiopASDFGHJKLzxcvbnm"
 
 Example 2:
 	Argument:
@@ -117,7 +134,26 @@ Example:
 		1961
 """
 def alive_people(data):
-	pass
+    dictionary = {}
+
+    for row in data:
+        if row[0] in dictionary:
+            dictionary[row[0]] += 1
+        else:
+            dictionary[row[0]] = 1
+
+    maximum = 0
+
+    for letter in dictionary:
+        if dictionary[letter] > maximum:
+            maximum = dictionary[letter]
+
+    same = []
+    for letter in dictionary:
+        if dictionary[letter] == maximum:
+            same.append(letter)
+
+    return same[-1]
 
 
 """
