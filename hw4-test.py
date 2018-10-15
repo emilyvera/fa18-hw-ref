@@ -89,6 +89,11 @@ class tester_zero_sum_subarray(unittest.TestCase):
 		self.assertEqual(tuple(zero_sum_subarray([0, 1, 2, 3, 4, 5])), (0, 1))
 		self.assertEqual(tuple(zero_sum_subarray([10, 20, -20, 3, 21, 2, -6])), (1, 2))
 
+class my_tester(unittest.TestCase):
+	# O(k) time and space
+	def test__given(self):
+		print(zero_sum_subarray([0, 1, 2, 3, 4, 5]))
+
 
 #===================================
 # BOILERPLATE CODE

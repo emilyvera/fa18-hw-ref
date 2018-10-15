@@ -48,13 +48,12 @@ Example 1:
         "qwertyuiopASDFGHJKLzxcvbnm"
 
 Example 2:
-	Argument:
-		"aardvarks are cool!"
-	Return:
-		None
-"""
+Argument:
+"aardvarks are cool!"
+Return:
+None"""
 def alphabet_finder(s):
-	pass
+    pass
 
 
 """
@@ -67,16 +66,18 @@ and b must be the largest value possible for the array.
 If multiple such subarrays exist (i.e. same b, different a), use the lowest value of a.
 
 Example:
-	Argument:
-		[1, 2, 3, 1, 4, 5, 6]
-	Return:
-		[1, 6]
+Argument:
+[1, 2, 3, 1, 4, 5, 6]
+Return:
+[1, 6]
 """
-def longest_unique_subarray(arr):
-	pass
+def longest_unique_subarray(S):
 
 
-"""
+
+
+
+    """"
 string_my_one_true_love
 
 A former(?) CA for this course really like[d] strings that have the same occurrences of letters.
@@ -93,30 +94,55 @@ Ungraded food for thought:
 Ideally, your method should also work on integer arrays without any modification.
 
 Example 1:
-	Argument:
-		"abcbabcdcdda"
-		There are 3 a's, 3 b's, 3 c's, and 3 d's. That means it is a very likable string!
-	Return:
-		True
+Argument:
+"abcbabcdcdda"
+There are 3 a's, 3 b's, 3 c's, and 3 d's. That means it is a very likable string!
+Return:
+True
 
 Example 2:
-	Argument:
-		"aaabbbcccddde"
-		There are 3 a's, 3 b's, 3 c's, and 3 d's. We have 1 e, which we can remove.
-	Return:
-		True
+Argument:
+"aaabbbcccddde"
+There are 3 a's, 3 b's, 3 c's, and 3 d's. We have 1 e, which we can remove.
+Return:
+True
 
 Example 3:
-	Argument:
-		"aaabbbcccdddeeffgg"
-		This string is similar to the other ones, except with 2 e's, f's and g's at the end.
-		To make this string likable, we need to remove the 2 e's, f's, and g's or we can remove
-		one a, b, c, and d. However all of these require more than one removal, so it becomes invalid.
-	Return:
-		False
+Argument:
+"aaabbbcccdddeeffgg"
+This string is similar to the other ones, except with 2 e's, f's and g's at the end.
+To make this string likable, we need to remove the 2 e's, f's, and g's or we can remove
+one a, b, c, and d. However all of these require more than one removal, so it becomes invalid.
+Return:
+False
 """
 def string_my_one_true_love(s):
-	pass
+    dictionary = {}
+
+    for letters in s:
+        if letters in dictionary:
+            dictionary[letters] += 1
+        else:
+            dictionary[letters] = 1
+
+    most = {}
+
+    for key,value in dictionary.items():
+        if value in dictionary:
+            most[value] += 1
+        else:
+            most[value] = 1
+
+    target = max(most,key=most.get)
+
+    for key in dictionary:
+        if dictionary[key] != target:
+            if dictionary[key] - 1 == 0:
+                return True
+            else:
+                return False
+
+    return True
 
 
 """
@@ -167,17 +193,31 @@ Each inner list should be a triplet as we defined above.
 We don't care about the order of triplets, nor the order of elements in each triplet.
 
 Example:
-	Arguments:
-		[-1, 0, 1, 2, -1, -4], 0
-	Return:
-		[
-			[-1, 0, 1],
-			[-1, -1, 2]
-		]
+    Arguments:
+        [-1, 0, 1, 2, -1, -4], 0
+    Return:
+    [
+        [-1, 0, 1],
+        [-1, -1, 2]
+    ]
 """
 def three_sum(arr, t):
-	pass
+    arr.sort()
+    arr_size = len(arr)
+    return_arr = []
 
+    for i in range(arr_size - 2):
+        left = i + 1
+        right = arr_size - 1
+        while left < right:
+            if arr[i] + arr[left] + arr[right] == t:
+                return_arr.append([arr[i], arr[left], arr[right]])
+            elif arr[i] + arr[left] + arr[right] < t:
+                left += 1
+            else:
+                right -= 1
+
+    return return_arr
 
 """
 happy_numbers
@@ -186,19 +226,37 @@ Given an input integer n > 0, return the number of happy integers between 1 and 
 https://en.wikipedia.org/wiki/Happy_number
 
 Example 1:
-	Argument:
-		8
-		The happy numbers between 1 and 8 are 1 and 7 (7 -> 49 -> 97 -> 130 -> 10 -> 1)
-	Return:
-		2468 // 1234 (i.e., 2)
+Argument:
+8
+The happy numbers between 1 and 8 are 1 and 7 (7 -> 49 -> 97 -> 130 -> 10 -> 1)
+Return:
+2468 // 1234 (i.e., 2)
 Example 2:
-	Argument:
-		15
-	Return:
-		4294967296 ** (1 / 16) (i.e., 4)
+Argument:
+15
+Return:
+4294967296 ** (1 / 16) (i.e., 4)
 """
 def happy_numbers(n):
-	pass
+    count = 0
+    for i in range(1, n+1):
+        if isHappy(i):
+            count = count + 1
+
+    return count
+
+
+def isHappy(n):
+    visited = set()
+    while True:
+        numbers = [int(c) for c in str(n)]
+        n = sum(number ** 2 for number in numbers)
+        if n == 1:
+            return True
+        elif n in visited:
+            return False
+        visited.add(n)
+
 
 
 """
@@ -216,20 +274,39 @@ Ungraded food for thought:
 Think about how to generalize your solution to any arbitrary target sum.
 
 Example 1:
-	Argument:
-		[0, 1, 2, 3, 4, 5]
-		Clearly, the first element by itself forms a subarray with sum == 0.
-	Return:
-		[0, 1]
+    Argument:
+        [0, 1, 2, 3, 4, 5]
+        Clearly, the first element by itself forms a subarray with sum == 0.
+    Return:
+        [0, 1]
 
 Example 2:
-	Argument:
-		[10, 20, -20, 3, 21, 2, -6]
-		In this case, arr[1:3] = [20, -20], so there is a zero sum subarray.
-	Return:
-		[1, 2]
+Argument:
+    [10, 20, -20, 3, 21, 2, -6]
+    In this case, arr[1:3] = [20, -20], so there is a zero sum subarray.
+Return:
+    [1, 2]
 """
 def zero_sum_subarray(arr):
-    pass 
+    length = len(arr)
+    sum = 0
+    dictionary = {}
+    possible = []
+
+    dictionary[0] = 1
+    for i in range(0, length):
+        sum += arr[i]
+        if sum == 0:
+            temp = [0, i]
+            possible.append(temp)
+        if dictionary[sum] is None:
+            temp = [dictionary[sum] + 1, i]
+            possible.append(temp)
+        else:
+            dictionary[sum] = i
+
+    return possible
+
+
 
 
